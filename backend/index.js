@@ -222,6 +222,24 @@ function signToken({ id, role }) {
 function fullUploadUrl(url) {
   return url || "";
 }
+
+function getPublicFrontendUrl(req) {
+  const envUrl = process.env.FRONTEND_URL;
+  if (envUrl && !envUrl.includes("localhost")) return envUrl.replace(/\/$/, "");
+
+  const origin = req.get("origin") || req.get("referer") || "";
+  if (origin) {
+    try {
+      const parsed = new URL(origin);
+      if (parsed.hostname.includes("onrender.com") || parsed.hostname.includes("localhost")) {
+        return parsed.origin.replace(/\/$/, "");
+      }
+    } catch {}
+  }
+
+  return (envUrl || "http://localhost:3000").replace(/\/$/, "");
+}
+
 //user
 function buildUserResponse(u) {
   if (!u) return null;
@@ -2208,7 +2226,7 @@ app.get('/events/:id/attendance', requireAuth, requireRole('admin'), async (req,
     }
     ensureEventQrTokens(event);
     await event.save();
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+    const frontendUrl = getPublicFrontendUrl(req);
     const qrUrl = `${frontendUrl}/event-check/${event._id}/in/${event.qrCheckInToken}`;
     return res.json({
       success: true,
