@@ -14,7 +14,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authSlice";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FaArrowRight, FaEnvelope, FaLock } from "react-icons/fa";
 import logo from "../image/logo2.png";
 import auth from "../image/auth.png";
@@ -26,6 +26,7 @@ function Login() {
   const { status, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +34,16 @@ function Login() {
     dispatch(login({ email, password }))
       .unwrap()
       .then((user) => {
+        const savedRedirect = localStorage.getItem("sparkup_redirect_after_login");
+        const locationRedirect = location.state?.from;
+        const redirectTo = locationRedirect || savedRedirect;
+
+        if (redirectTo) {
+          localStorage.removeItem("sparkup_redirect_after_login");
+          navigate(redirectTo, { replace: true });
+          return;
+        }
+
         if (user.role === "admin") navigate("/admin");
         else if (user.role === "innovator") navigate("/innovator");
         else if (user.role === "funder") navigate("/funder");
