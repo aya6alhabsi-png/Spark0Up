@@ -312,7 +312,7 @@ function Register() {
 
 
                       <FormGroup className="mb-3">
-                        <label style={labelStyle}>Gender for admin report</label>
+                        <label style={labelStyle}>Gender</label>
                         <div style={inputWrapStyle}>
                           <FaUser style={iconStyle} />
                           <Input
@@ -329,7 +329,7 @@ function Register() {
                       </FormGroup>
 
                       <FormGroup className="mb-3">
-                        <label style={labelStyle}>Field / Specialization for admin report</label>
+                        <label style={labelStyle}>Specialization</label>
                         <div style={inputWrapStyle}>
                           <FaUser style={iconStyle} />
                           <Input
