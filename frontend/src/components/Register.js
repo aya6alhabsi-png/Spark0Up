@@ -334,7 +334,7 @@ function Register() {
                           <FaUser style={iconStyle} />
                           <Input
                             style={inputStyle}
-                            placeholder="Example: Software, Business, Engineering"
+                            placeholder="Software, Business..."
                             value={fieldOfInterest}
                             onChange={(e) => setFieldOfInterest(e.target.value)}
                           />
