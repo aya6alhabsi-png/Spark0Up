@@ -6,7 +6,7 @@ import "./reviewerInvite.css";
 
 export default function ReviewerInvitePage() {
   const navigate = useNavigate();
-  const [params] = useSearchParams();
+  const [params] = useSearchParams();   
   const token = params.get("token") || "";
   const action = params.get("action") || "";
 
