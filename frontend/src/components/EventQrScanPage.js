@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Badge, Button, Card, CardBody, Container, Input, Label, Spinner } from "reactstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -75,10 +75,22 @@ export default function EventQrScanPage() {
   const [ageRange, setAgeRange] = useState("");
   const [message, setMessage] = useState("");
   const [certificate, setCertificate] = useState(null);
+  const currentScanPath = `/event-check/${eventId}/${type}/${token}`;
+
+  useEffect(() => {
+    if (!user) {
+      localStorage.setItem("sparkup_redirect_after_login", currentScanPath);
+    }
+  }, [user, currentScanPath]);
+
+  const goToLoginForScan = () => {
+    localStorage.setItem("sparkup_redirect_after_login", currentScanPath);
+    navigate("/login", { state: { from: currentScanPath } });
+  };
 
   const submitEvaluationAndGetCertificate = async () => {
     if (!user) {
-      navigate("/login", { replace: true });
+      goToLoginForScan();
       return;
     }
     setErr("");
@@ -146,7 +158,20 @@ export default function EventQrScanPage() {
               </div>
             )}
 
-            {!msg && (
+            {!msg && !user && (
+              <div className="mt-4 p-4" style={{ borderRadius: 24, background: "linear-gradient(135deg,#fff8ef,#eef7ff)", border: "1px solid #d9e8fb" }}>
+                <Badge pill color="warning" className="mb-3" style={{ padding: "9px 14px" }}>Login Required</Badge>
+                <h5 className="fw-bold" style={{ color: "#102846" }}>Please login first</h5>
+                <p style={{ color: "#5e7899", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 16px" }}>
+                  To protect the certificate, SparkUp needs to know which participant scanned the QR code. After login, you will return to this evaluation page automatically.
+                </p>
+                <Button color="primary" onClick={goToLoginForScan} style={{ borderRadius: 999, fontWeight: 900, padding: "11px 24px" }}>
+                  Login to Continue
+                </Button>
+              </div>
+            )}
+
+            {!msg && user && (
               <div className="mt-4">
                 <div className="row g-3 mb-3">
                   <div className="col-md-6">
