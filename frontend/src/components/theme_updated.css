@@ -1,0 +1,190 @@
+/* Light mode: keep your app exactly as-is */
+:root[data-theme="light"] {
+  --app-bg: #eaf4ff;
+  --card-bg: #ffffff;
+  --text: #0f2e4d;
+  --muted: rgba(15, 46, 77, 0.65);
+  --border: rgba(15, 46, 77, 0.12);
+}
+
+/* Dark mode: apply to all pages */
+:root[data-theme="dark"] {
+  --app-bg: #0b1220;
+  --card-bg: #121c2e;
+  --text: #e9f2ff;
+  --muted: rgba(233, 242, 255, 0.65);
+  --border: rgba(233, 242, 255, 0.12);
+}
+
+body {
+  background: var(--app-bg) !important;
+  color: var(--text) !important;
+}
+
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .offcanvas,
+:root[data-theme="dark"] .modal-content,
+:root[data-theme="dark"] .dropdown-menu {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] .text-muted {
+  color: var(--muted) !important;
+}
+
+:root[data-theme="dark"] .btn-light {
+  background-color: #22314a !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background-color: #0f172a !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* Ideas live experience */
+.idea-sequence-card {
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+.idea-sequence-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(16, 40, 70, 0.12) !important;
+}
+
+.ideas-live-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  color: #e6f3ff;
+  border: 1px solid rgba(255,255,255,0.22);
+  font-size: 12px;
+  font-weight: 800;
+ 
+}
+.ideas-live-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ffd166;
+  box-shadow: 0 0 0 0 rgba(255, 209, 102, 0.6);
+  animation: ideaPulse 1.8s infinite;
+}
+.ideas-live-chip.connected::before {
+  background: #59f3a5;
+  box-shadow: 0 0 0 0 rgba(89, 243, 165, 0.6);
+}
+.idea-sequence-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #edf5ff, #f7fbff);
+  color: #28558d;
+  font-weight: 800;
+  font-size: 12px;
+  border: 1px solid #d9e8fb;
+}
+.idea-detail-modal .modal-content {
+  border-radius: 26px;
+  overflow: hidden;
+}
+.idea-file-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid #e1ebf8;
+  background: linear-gradient(180deg, #f8fbff 0%, #eff6ff 100%);
+  padding: 16px;
+  border-radius: 18px;
+}
+.idea-file-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #153c72;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+.idea-file-link:hover {
+  color: #fff;
+  opacity: 0.95;
+}
+.idea-detail-stage-wrap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.idea-detail-stage {
+  border-radius: 14px;
+  padding: 12px 10px;
+  background: #edf3fb;
+  color: #6a84a4;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  border: 1px solid #e1ebf7;
+}
+.idea-detail-stage.active {
+  background: linear-gradient(135deg, #dff0ff, #eef6ff);
+  color: #174a84;
+  border-color: #b9d8ff;
+}
+.idea-detail-stage.active.success {
+  background: linear-gradient(135deg, #e4fff0, #f1fff7);
+  color: #1f7a46;
+  border-color: #bce6cb;
+}
+@keyframes ideaPulse {
+  0% { box-shadow: 0 0 0 0 rgba(89, 243, 165, 0.45); }
+  70% { box-shadow: 0 0 0 8px rgba(89, 243, 165, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(89, 243, 165, 0); }
+}
+
+.ideas-metric-card {
+  min-height: 112px;
+  border-radius: 20px;
+  padding: 18px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.ideas-metric-label {
+  color: rgba(255,255,255,0.76);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.ideas-metric-value {
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 900;
+}
+.ideas-metric-mini {
+  color: #fff;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.idea-avatar-shell {
+  box-shadow: 0 10px 24px rgba(36, 87, 151, 0.16);
+  border: 3px solid #fff;
+}
