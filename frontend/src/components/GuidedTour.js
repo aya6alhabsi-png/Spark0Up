@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 const pageGuides = {
   home: {
     label: "Home Guide",
-    emoji: "🏠",
     intro: "SparkUp main entrance",
     steps: [
       {
@@ -26,7 +25,6 @@ const pageGuides = {
 
   innovator: {
     label: "Innovator Guide",
-    emoji: "💡",
     intro: "Submit, update, and track ideas",
     steps: [
       {
@@ -54,7 +52,6 @@ const pageGuides = {
 
   funder: {
     label: "Funder Guide",
-    emoji: "💰",
     intro: "Review approved ideas and funding decisions",
     steps: [
       {
@@ -82,7 +79,6 @@ const pageGuides = {
 
   reviewer: {
     label: "Reviewer Guide",
-    emoji: "📝",
     intro: "Review assigned ideas professionally",
     steps: [
       {
@@ -110,7 +106,7 @@ const pageGuides = {
 
   admin: {
     label: "Admin Guide",
-    emoji: "🛡️",
+  
     intro: "Manage the full SparkUp workflow",
     steps: [
       {
